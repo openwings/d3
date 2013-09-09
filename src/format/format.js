@@ -58,8 +58,8 @@ d3.format = function(specifier) {
 
   return function(value) {
 
-    // Return the empty string for floats formatted as ints.
-    if (integer && (value % 1)) return "";
+    // Truncate floats for integer formatting.
+    if (integer && (value % 1)) value = value < 0 ? -Math.floor(-value) : Math.floor(value);
 
     // Convert negative to positive, and record the sign prefix.
     var negative = value < 0 || value === 0 && 1 / value < 0 ? (value = -value, "-") : sign;
